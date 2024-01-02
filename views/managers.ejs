@@ -1,26 +1,74 @@
-<a href="/">Home</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Managers List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
-<h1>Managers</h1>
+        h1 {
+            text-align: center;
+            color: #333;
+        }
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Manager ID</th>
-            <th>Salary</th>
-        </tr>
-    </thead>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-    <tbody>
-        <% managers.forEach(function(manager) { %>
-        <tr>
-            <td><%= manager.name %></td>
-            <td><%= manager._id %></td>
-            <td><%= manager.salary %></td>
-        </tr>
-        <% }); %>
-    </tbody>
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
 
-</table>
+        th {
+            background-color: #f2f2f2;
+        }
 
-<a href = "/managers/add">Add Manager</a>
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="/">Home</a>
+
+    <h1>Managers</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Manager ID</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% managers.forEach(function(manager) { %>
+            <tr>
+                <td><%= manager.name %></td>
+                <td><%= manager._id %></td>
+                <td><%= manager.salary %></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <a href="/managers/add">Add Manager</a>
+
+</body>
+</html>
