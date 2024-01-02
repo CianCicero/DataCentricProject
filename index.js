@@ -64,3 +64,26 @@ app.post('/stores/:id', (req, res) => {
         })
 });
 
+app.post("/stores/delete/:id", (req, res) => {
+    const storeId = req.params.id;
+    sql
+      .deleteAStore(storeId)
+      .then(() => {
+        res.redirect("/stores");
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  });
+
+app.get('/products', (req, res) => {
+    sql.getAllProducts()
+        .then((data) => {
+            res.render('products', {products: data});
+        })
+        .catch((err) => {
+            console.log(err);
+            res.render('error');
+        })
+    });
+

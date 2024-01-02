@@ -1,0 +1,30 @@
+<a href="/">Home</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Description</th>
+            <th>SID</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% products.forEach(function(product) { %>
+        <tr>
+            <td><%= product.pid %></td>
+            <td><%= product.productdesc %></td>
+            <td><%= product.sid || 'null' %></td>
+            <td><%= product.location || 'null' %></td>
+            <td><%= product.price ? product.price.toFixed(2) : 'null' %></td>
+            <td>
+                
+                <form action="/delete-product" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                    <input type="hidden" name="pid" value="<%= product.pid %>">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>

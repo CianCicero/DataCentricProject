@@ -70,9 +70,40 @@ function getAStoreByID(sid){
         })
 }
 
+function deleteAStore(sid){
+    return new Promise((resolve, reject) => {
+        pool.query("DELETE FROM store WHERE sid = ?", [sid])
+            .then((data) => {
+                resolve(data);
+            })
+            .catch((err) => {
+                reject(err);
+            })
+        })
+}
+
+function getAllProducts(){
+    return new Promise((resolve, reject) => {
+        pool.query( `SELECT p.pid, p.productdesc, ps.sid, s.location, ps.price 
+        FROM product p 
+        LEFT JOIN product_store ps ON p.pid = ps.pid 
+        LEFT JOIN store s ON ps.sid = s.sid;`)
+            .then((data) => {
+                resolve(data);
+            })
+            .catch(err => {
+                reject(err);
+            });
+    });
+}
+
+
 module.exports = {
     displayStores,
     addAStore,
     editStore,
-    getAStoreByID
+    getAStoreByID,
+    deleteAStore,
+    getAllProducts
+
 }
