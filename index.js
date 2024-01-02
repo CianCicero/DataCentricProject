@@ -111,4 +111,23 @@ app.get("/managers", async (req, res) => {
     }
 });
 
+app.get("/managers/add", (req, res) => {
+    res.render('addAManager');
+});
 
+app.post("/managers/add", async (req, res) => {
+    try {
+        const db = mongo.getDb();
+        const manager = {
+            _id: req.body.mgrid,
+            name: req.body.name,
+            salary: req.body.salary
+        };
+        await db.collection('managers').insertOne(manager);
+        res.redirect('/managers');
+    }catch(err){
+        console.log(err);
+        res.render("error" + err);
+    }
+});
+        
