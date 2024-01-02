@@ -34,6 +34,19 @@ function displayStores(){
         })
 }
 
+function addAStore(sid, location, mgrid){
+    return new Promise(function(resolve, reject){
+        pool.query("INSERT INTO store (sid, location, mgrid) VALUES (?, ?, ?)", [sid, location, mgrid])
+            .then((data) => {
+                resolve(data);
+            })
+            .catch((err) => {
+                reject(err);
+            })
+        })
+}
+
 module.exports = {
-    displayStores
+    displayStores,
+    addAStore
 }

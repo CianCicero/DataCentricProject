@@ -19,11 +19,26 @@ app.get('/', (req, res) => res.render('index.ejs'));
 app.get('/stores', (req, res) => {
     sql.displayStores()
         .then((data) => {
-            res.render('stores.ejs', {stores: data});
+            res.render('stores', {stores: data});
         })
         .catch((err) => {
             console.log(err);
-            res.render('error.ejs');
+            res.render('error');
+        })
+});
+
+app.get('/stores/add', (req, res) => {
+    res.render('addStore');
+});
+
+app.post('/stores/add', (req, res) => {
+    sql.addAStore(req.body.sid, req.body.location, req.body.mgrid)
+        .then((data) => {
+            res.redirect('/stores');
+        })
+        .catch((err) => {
+            console.log(err);
+            res.render("error" + err);
         })
 });
 
