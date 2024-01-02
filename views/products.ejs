@@ -19,7 +19,7 @@
             <td><%= product.price ? product.price.toFixed(2) : 'null' %></td>
             <td>
                 
-                <form action="/delete-product" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                <form action="products/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
                     <input type="hidden" name="pid" value="<%= product.pid %>">
                     <button type="submit">Delete</button>
                 </form>

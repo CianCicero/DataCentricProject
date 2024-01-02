@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 const mysql = require('mysql');
 var sql = require('./server/sqlDAO.js');
 var mongo = require('./server/mongoDAO.js');
+mongo.connect();
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
@@ -86,4 +87,28 @@ app.get('/products', (req, res) => {
             res.render('error');
         })
     });
+
+app.post("/products/delete", (req, res) => {
+    sql.deleteProduct(req.body.pid)
+        .then((data) => {
+            res.redirect('/products');
+        })
+        .catch((err) => {
+            console.log(err);
+            res.render("error" + err);
+        })
+}); 
+
+app.get("/managers", async (req, res) => {
+    try {
+        const db = mongo.getDb();
+        const managers = await db.collection('managers').find({}).toArray();
+        res.render('managers', { managers });
+        
+    } catch (err) {
+        console.log(err);
+        res.render("error" + err);
+    }
+});
+
 

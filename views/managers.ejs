@@ -1,0 +1,26 @@
+<a href="/">Home</a>
+
+<h1>Managers</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Manager ID</th>
+            <th>Salary</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% managers.forEach(function(manager) { %>
+        <tr>
+            <td><%= manager.name %></td>
+            <td><%= manager._id %></td>
+            <td><%= manager.salary %></td>
+        </tr>
+        <% }); %>
+    </tbody>
+
+</table>
+
+<a href = "/managers/add">Add Manager</a>

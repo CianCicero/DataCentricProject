@@ -97,6 +97,18 @@ function getAllProducts(){
     });
 }
 
+function deleteProduct(pid){
+    return new Promise((resolve, reject) => {
+        pool.query("DELETE FROM product WHERE pid = ?", [pid])
+            .then((data) => {
+                resolve(data);
+            })
+            .catch((err) => {
+                reject(err);
+            })
+        })
+}
+
 
 module.exports = {
     displayStores,
@@ -104,6 +116,7 @@ module.exports = {
     editStore,
     getAStoreByID,
     deleteAStore,
-    getAllProducts
+    getAllProducts,
+    deleteProduct
 
 }
