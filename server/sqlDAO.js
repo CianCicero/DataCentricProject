@@ -46,7 +46,33 @@ function addAStore(sid, location, mgrid){
         })
 }
 
+function editStore(sid, location, mgrid){
+    return new Promise(function(resolve, reject){
+        pool.query("UPDATE store SET location = ?, mgrid = ? WHERE sid = ?", [location, mgrid, sid])
+            .then((data) => {
+                resolve(data);
+            })
+            .catch((err) => {
+                reject(err);
+            })
+        })
+}
+
+function getAStoreByID(sid){
+    return new Promise(function(resolve, reject){
+        pool.query("SELECT * FROM store WHERE sid = ?", [sid])
+            .then((data) => {
+                resolve(data[0]);
+            })
+            .catch((err) => {
+                reject(err);
+            })
+        })
+}
+
 module.exports = {
     displayStores,
-    addAStore
+    addAStore,
+    editStore,
+    getAStoreByID
 }

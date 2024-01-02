@@ -42,3 +42,25 @@ app.post('/stores/add', (req, res) => {
         })
 });
 
+app.get('/stores/edit/:sid', (req, res) => {
+    sql.getAStoreByID(req.params.sid)
+        .then((data) => {
+            res.render('editStore', {store: data});
+        })
+        .catch((err) => {
+            console.log(err);
+            res.render('error');
+        })
+});
+
+app.post('/stores/:id', (req, res) => {
+    sql.editStore(req.body.sid, req.body.location, req.body.mgrid)
+        .then((data) => {
+            res.redirect('/stores');
+        })
+        .catch((err) => {
+            console.log(err);
+            res.render("error" + err);
+        })
+});
+
